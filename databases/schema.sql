@@ -13,3 +13,8 @@ create table user (
     admin enum('N', 'Y') default 'N' not null
 );
 
+create table auth_token (
+    auth_token char(255) primary key,
+    username char(100) not null,
+    foreign key(username) references user(username) on delete cascade
+);
