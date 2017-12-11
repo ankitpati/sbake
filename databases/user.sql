@@ -1,5 +1,11 @@
-drop user if exists sbake@localhost;
-create user sbake@localhost identified by @sbake_password;
+set @query := concat('create user ', @sbake_username, '@', @sbake_hostname,
+                                      ' identified by "', @sbake_password, '"');
+prepare stmt from @query;
+execute stmt;
+deallocate prepare stmt;
 
-grant usage on *.* to sbake@localhost;
-grant all privileges on sbake.* to sbake@localhost;
+set @query := concat('grant all privileges on ', @sbake_database, '.*',
+                                 ' to ', @sbake_username, '@', @sbake_hostname);
+prepare stmt from @query;
+execute stmt;
+deallocate prepare stmt;
