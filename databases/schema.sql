@@ -9,6 +9,7 @@ create table config (
 
 create table user (
     username char(100) primary key,
-    password char(255) not null
+    password char(255) not null,
+    admin enum('N', 'Y') default 'N' not null
 );
 
